@@ -7,22 +7,22 @@ class Wallet:
             raise ValueError("Неподдерживаемая валюта")
         self.name = name
         self.currency = currency
-        self.balance = 0
+        self._balance = 0
 
     def top_up_balance(self, amount: float):
         if amount < 0:
             raise ValueError("Нельзя пополнить отрицательную сумму")
-        self.balance += amount
+        self._balance += amount
 
     def pay(self, amount: float):
         if amount < 0:
             raise ValueError("Нельзя оплатить отрицательную сумму")
-        if self.balance < amount:
+        if self._balance < amount:
             raise ValueError("Недостаточно средств на счете")
-        self.balance -= amount
+        self._balance -= amount
 
     def get_balance_info(self):
-        print(f"Баланс кошелька '{self.name}': {self.balance} {self.currency}")
+        print(f"Баланс кошелька '{self.name}': {self._balance} {self.currency}")
 
     def delete_account(self):
         print(f"Кошелек '{self.name}' удален")
